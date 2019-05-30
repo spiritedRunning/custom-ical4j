@@ -1,0 +1,1 @@
+include ':app', ':ical4j'

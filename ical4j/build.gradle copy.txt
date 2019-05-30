@@ -1,0 +1,63 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
+
+
+ext {
+    slf4jVersion = '1.7.25'
+}
+
+
+android {
+    compileSdkVersion 28
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+publish {
+    userOrg = 'zachliu'//bintray.com注册的用户名
+    groupId = 'com.quanshi.third'//jcenter上的路径
+    artifactId = 'custom-ical4j'//上传到 Jcenter 的项目名称
+    publishVersion = '1.2'//版本号
+    desc = ''//选填
+    website = 'https://github.com/ical4j/ical4j'//这里是必填；可以填写你 Github 上的当前项目地址。注意格式必须是 github地址
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+
+    api "org.slf4j:slf4j-api:$slf4jVersion",
+            'commons-codec:commons-codec:1.11',
+            'org.apache.commons:commons-lang3:3.8.1',
+            'org.apache.commons:commons-collections4:4.1',
+            'com.sun.mail:javax.mail:1.6.2'
+    implementation 'javax.cache:cache-api:1.0.0'
+}
